@@ -1,159 +1,268 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jeff — Coffee & Aesthetic</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jeff — Coffee & Aesthetic</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: "Noto Sans TC", sans-serif;
+            background-color: #f5f3ef; /* 文青奶油白 */
+            color: #2c3e2f;
+        }
 
-    <style>
-        :root {
-            /* 定義主題顏色變數 */
-            --starbucks-green: #1e3932;
-            --cream-white: #f5f3ef;
-            --dark-text: #2c3e2f;
-            --light-grey: #dcdcd4;
-            --shadow-color: rgba(0,0,0,0.08);
-        }
+        /* 頂部導覽列 */
+        header {
+            background-color: #006341; /* 星巴克綠 */
+            padding: 18px;
+            color: white;
+            text-align: center;
+            font-size: 22px;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
 
-        body {
-            margin: 0;
-            /* 使用引入的 Noto Sans TC */
-            font-family: "Noto Sans TC", sans-serif; 
-            background-color: var(--cream-white);
-            color: var(--dark-text);
-            /* 讓滾動更平滑 */
-            scroll-behavior: smooth;
-        }
+        /* 大頭貼 Hero 區域 */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px 20px;
+        }
 
-        /* 頂部導覽列 */
-        header {
-            background-color: var(--starbucks-green);
-            padding: 18px;
-            color: white;
-            text-align: center;
-            font-size: 22px;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
+        .hero img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #1e3932;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
 
-        /* 大頭貼 Hero 區域 */
-        .hero {
-            text-align: center;
-            padding: 60px 20px 40px 20px;
-        }
+        .hero h1 {
+            margin-top: 22px;
+            color: #1e3932;
+            font-size: 32px;
+            letter-spacing: 1px;
+        }
 
-        .hero img {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid var(--starbucks-green);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* 陰影加深一點，強調大頭貼 */
-        }
+        .hero p {
+            font-size: 18px;
+            color: #444;
+            margin-top: 6px;
+        }
 
-        .hero h1 {
-            margin-top: 22px;
-            color: var(--starbucks-green);
-            font-size: 32px;
-            letter-spacing: 1px;
-        }
+        /* 分隔線 */
+        .divider {
+            width: 70%;
+            height: 2px;
+            background-color: #1e3932;
+            margin: 40px auto;
+            opacity: 0.2;
+        }
 
-        .hero p {
-            font-size: 18px;
-            color: #444;
-            margin-top: 6px;
-        }
+        /* 區塊標題 */
+        h2 {
+            font-size: 26px;
+            color: #1e3932;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
 
-        /* 分隔線 */
-        .divider {
-            width: 70%;
-            height: 2px;
-            background-color: var(--starbucks-green);
-            margin: 40px auto;
-            opacity: 0.15; /* 稍微降低透明度，更柔和 */
-        }
+        /* 每個內容卡片 */
+        .section {
+            width: 88%;
+            max-width: 780px;
+            margin: auto;
+            background: #ffffff;
+            padding: 28px;
+            margin-bottom: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
 
-        /* 區塊標題 */
-        h2 {
-            font-size: 26px;
-            color: var(--starbucks-green);
-            margin-bottom: 12px;
-            font-weight: 600;
-            border-bottom: 2px solid var(--light-grey); /* 增加底部線條，更具結構感 */
-            padding-bottom: 8px;
-        }
+        p {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #333;
+        }
 
-        /* 每個內容卡片 */
-        .section {
-            width: 88%;
-            max-width: 780px;
-            margin: auto;
-            background: #ffffff;
-            padding: 28px;
-            margin-bottom: 40px;
-            border-radius: 16px;
-            box-shadow: 0 6px 15px var(--shadow-color); /* 陰影稍微加大 */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* 🌟 優化 3: 增加過渡動畫 */
-        }
-        .section:hover {
-            transform: translateY(-3px); /* 輕微上浮效果 */
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-        }
+        /* 列表樣式 */
+        ul {
+            padding-left: 20px;
+        }
 
-        p {
-            font-size: 17px;
-            line-height: 1.7;
-            color: #333;
-        }
+        ul li {
+            margin: 6px 0;
+            font-size: 17px;
+            color: #333;
+        }
 
-        /* 列表樣式 */
-        ul {
-            padding-left: 20px;
-            margin-top: 20px;
-        }
+        /* 技能 */
+        .skill-bar {
+            margin: 8px 0 16px 0;
+        }
+        .skill-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .bar {
+            height: 10px;
+            background: #dcdcd4;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%;
+            background: #1e3932;
+            width: 75%;
+        }
 
-        ul li {
-            margin: 10px 0;
-            font-size: 17px;
-            color: #333;
-            list-style: none; /* 移除預設點點 */
-            position: relative;
-            padding-left: 20px;
-        }
-        ul li::before {
-            content: "☕"; /* 🌟 優化 3: 使用咖啡 emoji 作為列表標記 */
-            position: absolute;
-            left: 0;
-            color: var(--starbucks-green);
-        }
+        /* 拉花作品集 */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-gap: 18px;
+            margin-top: 20px;
+        }
 
-        /* 技能 */
-        .skill-bar {
-            margin: 12px 0 20px 0;
-        }
-        .skill-title {
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-        .bar {
-            height: 12px; /* 技能條稍微加高 */
-            background: var(--light-grey);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        .bar-fill {
-            height: 100%;
-            background: var(--starbucks-green);
-            border-radius: 20px 0 0 20px;
-            transition: width 1s ease-out; /* 增加載入動畫感 */
-        }
+        .gallery img {
+            width: 100%;
+            border-radius: 14px;
+            object-fit: cover;
+            height: 130px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
 
-        /* 拉花作品集 */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            grid-gap: 18px;
+        /* 社群按鈕 */
+        .social-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 8px;
+            border: 2px solid #1e3932;
+            color: #1e3932;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: #1e3932;
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1e3932;
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    Jeff — Coffee & Aesthetic Life
+</header>
+
+<!-- Hero 大頭貼區 -->
+<div class="hero">
+    <img src="data:image/jpeg;base64,{{your_uploaded_photo}}" alt="profile photo">
+    <h1>Junxian Yu</h1>
+    <p>星巴克咖啡師 · 美感生活創作者 · 拉花練習者</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- About Me -->
+<div class="section">
+    <h2>關於我</h2>
+    <p>
+        嗨，我是 Jeff！<br>
+        喜愛咖啡的香氣與日常的溫度，從與客人的互動中找到生活的節奏。<br><br>
+        我喜歡文青美感、街景色調、不同文化氛圍，也熱愛創作與紀錄生活的片段。  
+        對我來說，咖啡不只是飲品，也是「儀式感」、「情緒的出口」與「生活的方向」。
+        <br><br>
+        希望能用咖啡、影像與文字，帶給人溫暖、療癒與陪伴。
+    </p>
+</div>
+
+<!-- Coffee Journey -->
+<div class="section">
+    <h2>我的咖啡師之路</h2>
+    <p>
+        身為星巴克咖啡師，我每天都在與不同的故事相遇。  
+        咖啡是一種溫柔又堅定的力量，而我想成為能傳遞這份力量的人。  
+    </p>
+
+    <ul>
+        <li>✔ 為每位顧客帶來獨有的溫度</li>
+        <li>✔ 透過咖啡找到屬於自己的風味</li>
+        <li>✔ 用咖啡與創作分享幸福</li>
+        <li>✔ 目標：成為黑圍裙咖啡師</li>
+    </ul>
+</div>
+
+<!-- Skills Section -->
+<div class="section">
+    <h2>技能 Skills</h2>
+
+    <div class="skill-bar">
+        <div class="skill-title">咖啡知識 Coffee Knowledge</div>
+        <div class="bar"><div class="bar-fill" style="width:85%"></div></div>
+    </div>
+
+    <div class="skill-bar">
+        <div class="skill-title">拉花技巧 Latte Art</div>
+        <div class="bar"><div class="bar-fill" style="width:60%"></div></div>
+    </div>
+
+    <div class="skill-bar">
+        <div class="skill-title">顧客服務 Customer Service</div>
+        <div class="bar"><div class="bar-fill" style="width:95%"></div></div>
+    </div>
+
+    <div class="skill-bar">
+        <div class="skill-title">內容創作 Content Creation</div>
+        <div class="bar"><div class="bar-fill" style="width:70%"></div></div>
+    </div>
+</div>
+
+<!-- Portfolio (放拉花作品照) -->
+<div class="section">
+    <h2>作品集 Portfolio</h2>
+    <p>這裡將放上我的拉花作品、咖啡作品與生活美感照片。</p>
+
+    <div class="gallery">
+        <!-- 你給我拉花照片後，我會幫你放 -->
+        <img src="https://via.placeholder.com/400x400?text=Latte+Art" alt="temp">
+        <img src="https://via.placeholder.com/400x400?text=Coffee" alt="temp">
+        <img src="https://via.placeholder.com/400x400?text=Aesthetic" alt="temp">
+    </div>
+</div>
+
+<!-- Contact -->
+<div class="section">
+    <h2>聯絡我 Contact</h2>
+    <p>歡迎透過以下方式找到我：</p>
+
+    <div class="social-links">
+        <a href="https://www.instagram.com/junxianyu._" target="_blank">Instagram</a>
+        <a href="https://www.threads.net/@junxianyu._" target="_blank">Threads</a>
+    </div>
+</div>
+
+<footer>
+    © 2025 Junxianyu — All Rights Reserved.
+</footer>
+
+</body>
+</html>
