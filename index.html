@@ -233,32 +233,86 @@ body.dark-mode footer { background-color: #006341; color: #f0f0f0; }
     <h1 style="margin-top: 20px;">Junxian Yu</h1>
     <p>星巴克咖啡師 · 美感生活創作者 · 拉花練習者</p>
 
-    <!-- 互動拉花 LOGO（置中） -->
-    <div class="logo-container" style="margin-top: 30px;">
-        <svg width="180" height="180" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="coffeeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#a9746e"/>
-              <stop offset="50%" stop-color="#f5f3ef"/>
-              <stop offset="100%" stop-color="#a9746e"/>
-            </linearGradient>
-            <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.3"/>
-            </filter>
-          </defs>
+<!-- 互動拉花 Logo 容器 -->
+<div id="latteLogoContainer" style="width:400px; height:400px; margin:30px auto;">
+  <canvas id="latteLogo" width="400" height="400" style="border-radius:50%; background-color:#fff8f0; box-shadow:0 4px 15px rgba(0,0,0,0.2);"></canvas>
+</div>
 
-          <!-- 左心 -->
-          <path d="M54 60 C54 28, 90 28, 90 60 C90 92, 54 92, 54 60 Z"
-                fill="url(#coffeeGradient)" filter="url(#shadow)" stroke="#5a3a2e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          
-          <!-- 右心 -->
-          <path d="M126 60 C126 28, 162 28, 162 60 C162 92, 126 92, 126 60 Z"
-                fill="url(#coffeeGradient)" filter="url(#shadow)" stroke="#5a3a2e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          
-          <!-- J 字 -->
-          <path d="M90 92 C90 120, 114 120, 90 150"
-                fill="none" stroke="#5a3a2e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+<script>
+(function() {
+  const canvas = document.getElementById('latteLogo');
+  const ctx = canvas.getContext('2d');
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+
+  let time = 0;
+
+  // 心形公式
+  function heartPoint(theta, size) {
+      const x = size * 16 * Math.pow(Math.sin(theta), 3);
+      const y = -size * (13 * Math.cos(theta) - 5 * Math.cos(2*theta) - 2 * Math.cos(3*theta) - Math.cos(4*theta));
+      return {x, y};
+  }
+
+  // 畫單個心形
+  function drawHeart(x, y, size, color, progress=1) {
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      const steps = Math.floor(100 * progress);
+      for (let i = 0; i < steps; i++) {
+          const theta = (i / 100) * Math.PI * 2;
+          const p = heartPoint(theta, size);
+          if (i === 0) ctx.moveTo(x + p.x, y + p.y);
+          else ctx.lineTo(x + p.x, y + p.y);
+      }
+      ctx.closePath();
+      ctx.fill();
+  }
+
+  // 畫雙心融合
+  function drawLatte() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // 漩渦旋轉角度
+      const swirl = 0.05 * Math.sin(time / 10);
+
+      // 中心漸層心
+      const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 100);
+      gradient.addColorStop(0, '#f3c5a0'); // 奶泡色
+      gradient.addColorStop(1, '#d14a3f'); // 咖啡色
+
+      ctx.save();
+      ctx.translate(centerX, centerY);
+      ctx.rotate(swirl);
+      drawHeart(0, 20, 50, gradient, Math.min(time/20,1));
+      ctx.restore();
+
+      // 左右小心跳
+      const scale = 1 + 0.05 * Math.sin(time*2); // 心跳縮放
+      ctx.save();
+      ctx.translate(centerX - 60, centerY);
+      ctx.scale(scale, scale);
+      drawHeart(0, 0, 35, '#d14a3f');
+      ctx.restore();
+
+      ctx.save();
+      ctx.translate(centerX + 60, centerY);
+      ctx.scale(scale, scale);
+      drawHeart(0, 0, 35, '#d14a3f');
+      ctx.restore();
+  }
+
+  // 動畫循環
+  function animate() {
+      time += 0.1;
+      drawLatte();
+      requestAnimationFrame(animate);
+  }
+
+  animate();
+})();
+</script>
+
     </div>
 </div>
 
