@@ -320,10 +320,17 @@ body.dark-mode footer { background-color: #006341; color: #f0f0f0; }
       requestAnimationFrame(animate);
   }
 
-  // 確保在頁面完全載入後開始動畫
-  window.onload = function() {
-      animate();
-  };
+ // ... (您的 drawLatte 函式內容維持不變)
+
+  // 動畫循環
+  function animate() {
+      time += 0.1;
+      drawLatte();
+      requestAnimationFrame(animate);
+  }
+
+  // **移除 window.onload**，直接在腳本結束前呼叫 animate() 啟動動畫
+  animate(); // <--- 修正處：直接呼叫啟動函式
 })();
 </script>
 
